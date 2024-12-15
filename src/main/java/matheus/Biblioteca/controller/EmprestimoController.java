@@ -20,6 +20,7 @@ import matheus.Biblioteca.services.exceptions.ResourceNotFoundException;
 import matheus.Biblioteca.services.imp.EmprestimoServiceImp;
 
 @RestController
+@RequestMapping("emprestimo/")
 public class EmprestimoController {
 
     @Autowired

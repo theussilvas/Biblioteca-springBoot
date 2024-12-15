@@ -18,7 +18,7 @@ import matheus.Biblioteca.domain.models.Livro;
 import matheus.Biblioteca.services.imp.BibliotecaServiceImp;
 
 @RestController
-@RequestMapping("/bibliotecas")
+@RequestMapping("/biblioteca")
 public class BibliotecaController {
 
     @Autowired
@@ -32,13 +32,17 @@ public class BibliotecaController {
         return ResponseEntity.created(location).body(novoLivro);
     }
 
-    @GetMapping("/{bibliotecaId}/livros")
+    @GetMapping("/livros")
     public List<Livro> getAll(@PathVariable Long bibliotecaId){
         return bibliotecaServiceImp.todoOsLivros(bibliotecaId);
     }
 
-    @GetMapping("/{bibliotecaId}/livros/titulo")
-    public List<Livro> livroPorTitulo(@PathVariable Long bibliotecaId, @RequestParam String titulo){
-        return bibliotecaServiceImp.procurarPorTitulo(titulo);
+    @GetMapping("/livro/search")
+    public ResponseEntity<List<Livro>> buscarLivros(@RequestParam String titulo){
+        List<Livro> livros = bibliotecaServiceImp.procurarPorTitulo(titulo);
+        if(livros.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(livros);
     }
 }

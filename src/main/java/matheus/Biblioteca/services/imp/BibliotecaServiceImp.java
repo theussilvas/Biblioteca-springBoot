@@ -32,7 +32,8 @@ public class BibliotecaServiceImp implements  BibliotecaService{
     }
 
     public List<Livro> procurarPorTitulo(String titulo) {
-        throw new UnsupportedOperationException("Unimplemented method 'procurarPorTitulo'");
+        return this.livroRepository.findByTitulo(titulo);
+        
     }
 
 
